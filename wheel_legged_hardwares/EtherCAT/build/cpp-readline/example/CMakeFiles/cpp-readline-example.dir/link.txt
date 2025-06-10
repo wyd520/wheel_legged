@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic "CMakeFiles/cpp-readline-example.dir/main.cpp.o" -o cpp-readline-example  -Wl,-rpath,/home/rb/four_wheelleg_EtherCAT/EtherCAT/build/cpp-readline/src ../src/libcpp-readline.so.0.1.0 -lreadline

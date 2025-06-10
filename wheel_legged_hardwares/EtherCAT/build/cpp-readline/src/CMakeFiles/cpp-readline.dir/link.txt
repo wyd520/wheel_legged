@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -shared -Wl,-soname,libcpp-readline.so.1 -o libcpp-readline.so.0.1.0 "CMakeFiles/cpp-readline.dir/Console.cpp.o"  -lreadline
