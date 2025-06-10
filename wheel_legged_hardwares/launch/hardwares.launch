@@ -1,0 +1,9 @@
+<launch>
+
+    <node respawn="true" pkg="joy" type="joy_node" name="wheelleg_joy" >
+        <param name="dev" type="string" value="/dev/input/js0" />
+    </node>
+
+    <node name="hardwares" pkg="wheelleg_hardwares" type="HardwareToRos" output="screen" />
+
+</launch>
