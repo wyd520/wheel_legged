@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++11  -pthread CMakeFiles/master_stack_test.dir/main.cpp.o -o master_stack_test  -Wl,-rpath,/home/rb/four_wheelleg_EtherCAT/EtherCAT/build -lm libmotor.a ../libsoem.so /usr/lib/x86_64-linux-gnu/libpython3.8.so -lm -lpthread -lrt
