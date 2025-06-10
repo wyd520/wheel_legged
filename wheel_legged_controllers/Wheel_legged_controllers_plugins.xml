@@ -1,0 +1,16 @@
+<library path="lib/libwheel_legged_controllers">
+
+    <class name="wheel_legged_controller/WheelLeggedController" type="wheel_legged_controller::WheelLeggedController"
+           base_class_type="controller_interface::ControllerBase">
+        <description>
+            The basic legged controller.
+        </description>
+    </class>
+
+    <class name="wheel_legged_controller/WheelLeggedCheaterController" type="wheel_legged_controller::WheelLeggedCheaterController"
+           base_class_type="controller_interface::ControllerBase">
+        <description>
+            The basic legged controller with cheat state estimator
+        </description>
+    </class>
+</library>

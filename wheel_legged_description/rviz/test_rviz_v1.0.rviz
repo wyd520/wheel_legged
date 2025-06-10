@@ -1,0 +1,324 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 70
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /TF1
+        - /TF1/Frames1
+        - /TF1/Tree1
+      Splitter Ratio: 0.5
+    Tree Height: 528
+Preferences:
+  PromptSaveOnExit: true
+Toolbars:
+  toolButtonStyle: 2
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: odom
+      Value: true
+    - Alpha: 1
+      Class: rviz/RobotModel
+      Collision Enabled: false
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        LB_hip_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        LB_knee_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        LF_FOOT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        LH_FOOT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Labad_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Lhip_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Link Tree Style: Links in Alphabetic Order
+        Lknee_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Lwheel_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        RB_hip_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        RB_knee_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        RF_FOOT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        RH_FOOT:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Rabad_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Rhip_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Rknee_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        Rwheel_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_imu:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        waist_Link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+      Name: RobotModel
+      Robot Description: wheel_legged_description
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /wheel_legged/currentState
+      Name: Current State
+      Namespaces:
+        Center of Pressure: true
+        EE Forces: true
+        EE Positions: true
+        Support Polygon: true
+      Queue Size: 100
+      Value: true
+    - Class: rviz/TF
+      Enabled: true
+      Filter (blacklist): ""
+      Filter (whitelist): ""
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        LB_hip_Link:
+          Value: false
+        LB_knee_Link:
+          Value: false
+        LF_FOOT:
+          Value: false
+        LH_FOOT:
+          Value: false
+        Labad_Link:
+          Value: false
+        Lhip_Link:
+          Value: false
+        Lknee_Link:
+          Value: false
+        Lwheel_Link:
+          Value: false
+        RB_hip_Link:
+          Value: false
+        RB_knee_Link:
+          Value: false
+        RF_FOOT:
+          Value: false
+        RH_FOOT:
+          Value: false
+        Rabad_Link:
+          Value: false
+        Rhip_Link:
+          Value: false
+        Rknee_Link:
+          Value: false
+        Rwheel_Link:
+          Value: false
+        base_imu:
+          Value: false
+        base_link:
+          Value: false
+        odom:
+          Value: false
+        waist_Link:
+          Value: false
+      Marker Alpha: 1
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        odom:
+          base_link:
+            LB_hip_Link:
+              LB_knee_Link:
+                LH_FOOT:
+                  {}
+                Lwheel_Link:
+                  {}
+            RB_hip_Link:
+              RB_knee_Link:
+                RH_FOOT:
+                  {}
+                Rwheel_Link:
+                  {}
+            base_imu:
+              {}
+            waist_Link:
+              Labad_Link:
+                Lhip_Link:
+                  Lknee_Link:
+                    LF_FOOT:
+                      {}
+              Rabad_Link:
+                Rhip_Link:
+                  Rknee_Link:
+                    RF_FOOT:
+                      {}
+      Update Interval: 0
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Class: grid_map_rviz_plugin/GridMap
+      Color: 200; 200; 200
+      Color Layer: elevation
+      Color Transformer: GridMapLayer
+      Enabled: true
+      Height Layer: elevation
+      Height Transformer: GridMapLayer
+      History Length: 1
+      Invert Rainbow: false
+      Max Color: 255; 255; 255
+      Max Intensity: 10
+      Min Color: 0; 0; 0
+      Min Intensity: 0
+      Name: GridMap
+      Show Grid Lines: true
+      Topic: ""
+      Unreliable: false
+      Use Rainbow: true
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /wheel_legged/optimizedStateTrajectory
+      Name: Optimized State
+      Namespaces:
+        CoM Trajectory: true
+        EE Trajectories: true
+      Queue Size: 100
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Default Light: true
+    Fixed Frame: odom
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/MoveCamera
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/Select
+    - Class: rviz/SetInitialPose
+      Theta std deviation: 0.2617993950843811
+      Topic: initialpose
+      X std deviation: 0.5
+      Y std deviation: 0.5
+    - Class: rviz/SetGoal
+      Topic: goal
+  Value: true
+  Views:
+    Current:
+      Class: rviz/Orbit
+      Distance: 1.3972160816192627
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Field of View: 0.7853981852531433
+      Focal Point:
+        X: 0.11153791099786758
+        Y: -0.2269209623336792
+        Z: 0.25474458932876587
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.2753986120223999
+      Target Frame: <Fixed Frame>
+      Yaw: 1.412209391593933
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 749
+  Hide Left Dock: false
+  Hide Right Dock: false
+  QMainWindow State: 000000ff00000000fd00000001000000000000015600000293fc0200000001fb000000100044006900730070006c006100790073010000003d00000293000000c900ffffff000003170000029300000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Width: 1139
+  X: 445
+  Y: 130

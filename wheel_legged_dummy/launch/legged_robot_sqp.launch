@@ -1,0 +1,48 @@
+<?xml version="1.0" ?>
+
+<launch>
+    <!-- visualization config -->
+    <arg name="rviz"               default="true" />
+    <arg name="description_name"   default="wheel_legged_description"/>
+    <arg name="multiplot"          default="false" />
+
+    <!-- The task file for the mpc. -->
+    <arg name="taskFile"          default="$(find wheel_legged_controllers)/config/Wheel_legged_command/task.info"/>
+    <!-- The reference related config file of the robot -->
+    <arg name="referenceFile"     default="$(find wheel_legged_controllers)/config/Wheel_legged_command/reference.info"/>
+    <!-- The URDF model of the robot -->
+    <arg name="urdfFile"          default="$(find wheel_legged_description)/urdf/Wheel_legged_sim2.urdf"/>
+    <!-- The file defining gait definition -->
+    <arg name="gaitCommandFile"   default="$(find wheel_legged_controllers)/config/Wheel_legged_command/gait.info"/>
+
+    <!-- rviz -->
+    <group if="$(arg rviz)">
+      <param name="$(arg description_name)" textfile="$(arg urdfFile)"/>
+      <arg name="rvizconfig" default="$(find wheel_legged_description)/rviz/test_rviz_v2.0.rviz" />
+      <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rvizconfig)" output="screen" />
+    </group>
+
+    <!-- multiplot -->
+    <group if="$(arg multiplot)">
+      <include file="$(find wheel_legged_dummy)/launch/multiplot.launch"/>
+    </group>
+
+    <!-- make the files into global parameters -->
+    <param name="multiplot"         value="$(arg multiplot)"/>
+    <param name="taskFile"          value="$(arg taskFile)" />
+    <param name="referenceFile"     value="$(arg referenceFile)" />
+    <param name="urdfFile"          value="$(arg urdfFile)" />
+    <param name="gaitCommandFile"   value="$(arg gaitCommandFile)"/>
+
+    <node pkg="wheel_legged_dummy" type="wheel_legged_robot_sqp_mpc" name="wheel_legged_robot_sqp_mpc"
+          output="screen" launch-prefix=""/>
+
+    <node pkg="wheel_legged_dummy" type="wheel_legged_robot_dummy" name="wheel_legged_robot_dummy"
+          output="screen" launch-prefix="gnome-terminal --"/>
+
+    <node pkg="wheel_legged_dummy" type="wheel_legged_robot_target" name="wheel_legged_robot_target"
+          output="screen" launch-prefix="gnome-terminal --"/>
+
+    <node pkg="wheel_legged_dummy" type="wheel_legged_robot_gait_command" name="wheel_legged_robot_gait_command"
+          output="screen" launch-prefix="gnome-terminal --"/>
+</launch>

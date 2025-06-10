@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+
+<launch>
+    <arg name="robot_type" default="wheel_legged"/>
+    <!-- visualization config -->
+    <arg name="rviz"               default="true" />
+    <arg name="description_name"   default="wheel_legged_description"/>
+    <arg name="multiplot"          default="false"/>
+
+    <!-- make the files into global parameters -->
+    <!-- The task file for the mpc. -->
+    <arg name="taskFile" default="$(find wheel_legged_controllers)/config/Wheel_legged_command/task.info"/>
+    <!-- The reference related config file of the robot -->
+    <arg name="referenceFile" default="$(find wheel_legged_controllers)/config/Wheel_legged_command/reference.info"/>
+    <!-- The URDF model of the robot -->
+    <arg name="urdfFile" default="$(find wheel_legged_description)/urdf/Wheel_legged_sim2.urdf"/>
+    <!-- <arg name="urdfFileOrigin"    default="$(find humanoid_legged_description)/urdf/humanoid_legged_origin.urdf"/> -->
+    <!-- The file defining gait definition -->
+    <arg name="gaitCommandFile" default="$(find wheel_legged_controllers)/config/Wheel_legged_command/gait.info"/>
+
+    <!-- rviz -->
+    <group if="$(arg rviz)">
+      <param name="$(arg description_name)" textfile="$(find wheel_legged_description)/urdf/Wheel_legged_sim2.urdf"/>
+      <arg name="rvizconfig" default="$(find wheel_legged_description)/rviz/test_rviz_v2.0.rviz" />
+      <node pkg="rviz" type="rviz" name="rviz" args="-d $(arg rvizconfig)" output="screen" />
+    </group> 
+
+    <!-- make the files into global parameters -->
+    <param name="taskFile"          value="$(arg taskFile)" />
+    <param name="referenceFile"     value="$(arg referenceFile)" />
+    <param name="urdfFile"          value="$(arg urdfFile)" />
+    <!-- <param name="urdfFileOrigin"          value="$(arg urdfFileOrigin)" /> -->
+    <param name="gaitCommandFile"   value="$(arg gaitCommandFile)"/>
+    <!-- <param name="$(arg description_name)" textfile="$(arg urdfFileOrigin)"/> -->
+    <param name="$(arg description_name)" textfile="$(find wheel_legged_description)/urdf/Wheel_legged_sim2.urdf" />
+
+    <node pkg="wheel_legged_dummy" type="wheel_legged_robot_gait_command" name="Wheel_legged_robot_gait_command"
+          output="screen" launch-prefix="gnome-terminal --"/>
+
+    <node pkg="wheel_legged_controllers" type="wheel_legged_target_trajectories_publisher" name="Wheel_legged_robot_target"
+          output="screen" />
+
+    <node pkg="wheel_legged_controllers" type="cheat_controller_node" name="cheat_controller"
+          output="screen" launch-prefix="gnome-terminal --"/>
+
+    <node pkg="mujoco_sim" type="wheel_legged_sim.py" name="wheel_legged_sim"
+          output="screen"/>
+
+</launch>

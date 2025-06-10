@@ -1,0 +1,27 @@
+teleop:
+  walk:
+    type: topic
+    message_type: geometry_msgs/Twist
+    topic_name: cmd_vel
+    deadman_buttons: [ 4 ]
+    axis_mappings:
+      - axis: 0
+        target: angular.z
+        scale: 3.1415
+      - axis: 1
+        target: linear.x
+        scale: 1.0
+      - axis: 2
+        target: linear.y
+        scale: 0.8
+        
+  load_controller:
+    type: topic
+    message_type: std_msgs/Float32
+    topic_name: load_controller
+    deadman_buttons: [ 7 ]
+    axis_mappings:
+      - button: 7
+        target: data
+        scale: 2
+        offset: 0

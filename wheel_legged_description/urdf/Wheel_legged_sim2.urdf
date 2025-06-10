@@ -1,0 +1,1177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot name="Wheel_legged_sim">
+  <gazebo>
+    <plugin filename="libwheel_legged_hw_sim.so" name="gazebo_ros_control">
+      <robotNamespace>/</robotNamespace>
+      <robotParam>wheel_legged_description</robotParam>
+      <robotSimType>ocs2/wheel_legged/LeggedHWSim</robotSimType>
+    </plugin>
+  </gazebo>
+  <gazebo>
+    <plugin filename="libgazebo_ros_p3d.so" name="p3d_base_controller">
+      <alwaysOn>true</alwaysOn>
+      <updateRate>1000.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <topicName>ground_truth/state</topicName>
+      <gaussianNoise>0</gaussianNoise>
+      <frameName>world</frameName>
+      <xyzOffsets>0 0 0</xyzOffsets>
+      <rpyOffsets>0 0 0</rpyOffsets>
+    </plugin>
+  </gazebo>
+  <link name="dummy_link">
+    </link>
+  <joint name="dummy_to_base_link" type="fixed">
+    <parent link="dummy_link"/>
+    <child link="base_link"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  <link
+    name="base_link">
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.52941 0.54902 0.54902 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.28 0.33 0.213" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="base_to_base_inertia" type="fixed">
+        <parent link="base_link"/>
+        <child link="base_inertia"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  <link name="base_inertia">
+      <inertial>
+          <origin
+            xyz="-0.034923 0.0027299 0.021738"
+            rpy="0 0 0" />
+          <mass
+            value="16.8740" />
+          <inertia
+            ixx="0.29866736"
+            ixy="0.00356184"
+            ixz="-0.02224445"
+            iyy="0.48858061"
+            iyz="0.00137258"
+            izz="0.65670964" />
+      </inertial>
+  </link>
+    <!-- Imu is fixed to the base link -->
+  <joint name="base_imu_joint" type="fixed">
+    <origin rpy="0. 0. 0." xyz="0. 0. 0."/>
+    <parent link="base_link"/>
+    <child link="base_imu"/>
+  </joint>
+  <!-- Imu link -->
+  <link name="base_imu">
+    <inertial>
+      <mass value="0.01"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001"/>
+    </inertial>
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <box size="0.015 0.015 0.004"/>
+      </geometry>
+    </visual>
+    <material name="orange">
+      <color rgba="255 108 10 255"/>
+    </material>
+  </link>
+  <gazebo reference="base_imu">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="base_imu_joint">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+  <link
+    name="waist_Link">
+    <inertial>
+      <origin
+        xyz="0.31834 -0.0058844 -0.014821"
+        rpy="0 0 0" />
+      <mass
+        value="0.000001" />
+      <inertia
+        ixx="0.000001"
+        ixy="0.000001"
+        ixz="0.000001"
+        iyy="0.000001"
+        iyz="0.000001"
+        izz="0.000001" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/waist_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <!-- <collision>
+      <origin
+        xyz="0.28 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <box size="0.56 0.24 0.1" />
+      </geometry>
+    </collision> -->
+  </link>
+  <joint
+    name="Joint_waist"
+    type="fixed">
+    <origin
+      xyz="0.00010702 0.0053589 0.070915"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="waist_Link" />
+  </joint>
+  <link
+    name="Labad_Link">
+    <inertial>
+      <origin
+        xyz="-0.0059569 -0.010794 -0.00017197"
+        rpy="0 0 0" />
+      <mass
+        value="1.27" />
+      <inertia
+        ixx="0.00270"
+        ixy="0.00002"
+        ixz="0.00000"
+        iyy="0.00162"
+        iyz="-0.00001"
+        izz="0.00284" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/Labad_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57 0 0" />
+      <geometry>
+        <cylinder length="0.13" radius="0.048" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Labad"
+    type="revolute">
+    <origin
+      xyz="0.56007 0.10043 -0.037739"
+      rpy="0 0 0" />
+    <parent
+      link="waist_Link" />
+    <child
+      link="Labad_Link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-0.424"
+      upper="1.04"
+      effort="24.206"
+      velocity="100" />
+  </joint>
+  <link
+    name="Lhip_Link">
+    <inertial>
+      <origin
+        xyz="-0.00072323 -0.0046042 -0.086506"
+        rpy="0 0 0" />
+      <mass
+        value="1.02" />
+      <inertia
+        ixx="0.00953"
+        ixy="0.00000"
+        ixz="-0.00005"
+        iyy="0.00994"
+        iyz="0.00039"
+        izz="0.00079" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/Lhip_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 -0.115"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.23" radius="0.05" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Lhip"
+    type="revolute">
+    <origin
+      xyz="-0.00017444 0.077692 0.00019391"
+      rpy="0 0 0" />
+    <parent
+      link="Labad_Link" />
+    <child
+      link="Lhip_Link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.503"
+      upper="1.41"
+      effort="22.76"
+      velocity="100" />
+  </joint>
+  <link
+    name="Lknee_Link">
+    <inertial>
+      <origin
+        xyz="-0.0017065 -0.00067242 -0.14609"
+        rpy="0 0 0" />
+      <mass
+        value="0.18" />
+      <inertia
+        ixx="0.00159"
+        ixy="0.00000"
+        ixz="-0.00002"
+        iyy="0.00159"
+        iyz="0.00005"
+        izz="0.00003" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/Lknee_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 -0.125"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.25" radius="0.04" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Lknee"
+    type="revolute">
+    <origin
+      xyz="-0.0016586 0.031407 -0.23005"
+      rpy="0 0 0" />
+    <parent
+      link="Lhip_Link" />
+    <child
+      link="Lknee_Link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.14"
+      upper="0"
+      effort="28"
+      velocity="100" />
+  </joint>
+  
+  <joint dont_collapse="true" name="LF_foot_fixed" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.0025 0.002 -0.232"/>
+    <parent link="Lknee_Link"/>
+    <child link="LF_FOOT"/>
+  </joint>
+  <link name="LF_FOOT">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+      <material name=""/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.06"/>
+      <inertia ixx="9.600000000000001e-06" ixy="0.0" ixz="0.0" iyy="9.600000000000001e-06" iyz="0.0" izz="9.600000000000001e-06"/>
+    </inertial>
+  </link>
+  <gazebo reference="LF_foot_fixed">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+  <gazebo reference="Labad_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="Lhip_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+  <gazebo reference="Lknee_Link">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <gazebo reference="LF_FOOT">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+  
+  <transmission name="LF_HAA_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_Labad">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LF_HAA_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="LF_HFE_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_Lhip">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LF_HFE_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="LF_KFE_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_Lknee">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LF_KFE_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <link
+    name="Rabad_Link">
+    <inertial>
+      <origin
+        xyz="-0.0060593 0.010773 0.00059437"
+        rpy="0 0 0" />
+      <mass
+        value="1.27" />
+      <inertia
+        ixx="0.00270"
+        ixy="-0.00002"
+        ixz="0.00000"
+        iyy="0.00162"
+        iyz="0.00001"
+        izz="0.00284" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/Rabad_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57 0 0" />
+      <geometry>
+        <cylinder length="0.13" radius="0.048" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Rabad"
+    type="revolute">
+    <origin
+      xyz="0.55997 -0.11311 -0.039239"
+      rpy="0 0 0" />
+    <parent
+      link="waist_Link" />
+    <child
+      link="Rabad_Link" />
+    <axis
+      xyz="1 0 0" />
+    <limit
+      lower="-1.04"
+      upper="0.424"
+      effort="24.206"
+      velocity="100" />
+  </joint>
+  <link
+    name="Rhip_Link">
+    <inertial>
+      <origin
+        xyz="-0.00032807 0.0034224 -0.086549"
+        rpy="0 0 0" />
+      <mass
+        value="1.02" />
+      <inertia
+        ixx="0.00953"
+        ixy="0.00000"
+        ixz="-0.00005"
+        iyy="0.00994"
+        iyz="-0.00041"
+        izz="0.00079" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/Rhip_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 -0.115"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.23" radius="0.05" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Rhip"
+    type="revolute">
+    <origin
+      xyz="-7.1411E-05 -0.076714 0.00089968"
+      rpy="0 0 0" />
+    <parent
+      link="Rabad_Link" />
+    <child
+      link="Rhip_Link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.503"
+      upper="1.41"
+      effort="22.76"
+      velocity="100" />
+  </joint>
+  <link
+    name="Rknee_Link">
+    <inertial>
+      <origin
+        xyz="-0.0045928 -0.00013516 -0.14629"
+        rpy="0 0 0" />
+      <mass
+        value="0.18" />
+      <inertia
+        ixx="0.00159"
+        ixy="0.00000"
+        ixz="-0.00005"
+        iyy="0.00159"
+        iyz="-0.00005"
+        izz="0.00003" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/Rknee_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 -0.125"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.25" radius="0.04" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_Rknee"
+    type="revolute">
+    <origin
+      xyz="-0.0011405 -0.032389 -0.22976"
+      rpy="0 0 0" />
+    <parent
+      link="Rhip_Link" />
+    <child
+      link="Rknee_Link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.14"
+      upper="0"
+      effort="28"
+      velocity="100" />
+  </joint>
+  <joint dont_collapse="true" name="RF_foot_fixed" type="fixed">
+    <origin rpy="0 0 0" xyz="-0.007 -0.002 -0.232"/>
+    <parent link="Rknee_Link"/>
+    <child link="RF_FOOT"/>
+  </joint>
+  <link name="RF_FOOT">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+      <material name=""/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.06"/>
+      <inertia ixx="9.600000000000001e-06" ixy="0.0" ixz="0.0" iyy="9.600000000000001e-06" iyz="0.0" izz="9.600000000000001e-06"/>
+    </inertial>
+  </link>
+  <gazebo reference="RF_foot_fixed">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+  <gazebo reference="Rabad_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="Rhip_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+  <gazebo reference="Rknee_Link">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <gazebo reference="RF_FOOT">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+  <transmission name="RF_HAA_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_Rabad">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RF_HAA_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RF_HFE_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_Rhip">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RF_HFE_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RF_KFE_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_Rknee">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RF_KFE_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <link
+    name="LB_hip_Link">
+    <inertial>
+      <origin
+        xyz="-0.00031244 0.015158 -0.038984"
+        rpy="0 0 0" />
+      <mass
+        value="0.34817" />
+      <inertia
+        ixx="0.00135"
+        ixy="0.00000"
+        ixz="-0.00001"
+        iyy="0.00143"
+        iyz="0.00000"
+        izz="0.00009" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheel_legged_description/meshes_controller/LB_hip_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0.02 -0.04"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.20" radius="0.02" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_LBhip"
+    type="revolute">
+    <origin
+      xyz="0.00011754 0.17466 0.068919"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="LB_hip_Link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.529"
+      upper="0.529"
+      effort="69.923"
+      velocity="100" />
+  </joint>
+  <link
+    name="LB_knee_Link">
+    <inertial>
+      <origin
+        xyz="0.00354864922615338 -0.000476762690283003 0.11149718524343"
+        rpy="0 0 0" />
+      <mass
+        value="0.4417" />
+      <inertia
+        ixx="0.00244"
+        ixy="0.00000"
+        ixz="-0.00002"
+        iyy="0.00249"
+        iyz="0.00002"
+        izz="0.00007" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/LB_knee_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.11"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.22" radius="0.02" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_LBknee"
+    type="prismatic">
+    <origin
+      xyz="-0.0053715 0.041755 -0.34324"
+      rpy="0 0 0" />
+    <parent
+      link="LB_hip_Link" />
+    <child
+      link="LB_knee_Link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-0.16"
+      upper="0"
+      effort="77.567"
+      velocity="100" />
+  </joint>
+  <joint dont_collapse="true" name="LH_foot_fixed" type="fixed">
+    <origin rpy="0 0 0" xyz="0 0.063 -0.07"/>
+    <parent link="LB_knee_Link"/>
+    <child link="LH_FOOT"/>
+  </joint>
+  <link name="LH_FOOT">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+      <material name=""/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.06"/>
+      <inertia ixx="9.600000000000001e-06" ixy="0.0" ixz="0.0" iyy="9.600000000000001e-06" iyz="0.0" izz="9.600000000000001e-06"/>
+    </inertial>
+  </link>
+  <link
+    name="Lwheel_Link">
+    <inertial>
+      <origin
+        xyz="0.00010458 -0.011045 -3.7866E-05"
+        rpy="0 0 0" />
+      <mass
+        value="0.825401" />
+      <inertia
+        ixx="0.00145"
+        ixy="0.00000"
+        ixz="0.00000"
+        iyy="0.00186"
+        iyz="0.00000"
+        izz="0.00145" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/Lwheel_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57 0 0" />
+      <geometry>
+        <cylinder length="0.04" radius="0.09" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_LWheel"
+    type="fixed">
+    <origin
+      xyz="0.0026399 0.0617 -0.0001032"
+      rpy="0 0 0" />
+    <parent
+      link="LB_knee_Link" />
+    <child
+      link="Lwheel_Link" />
+    <!-- <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="3.14"
+      effort="77.567"
+      velocity="100" /> -->
+  </joint>
+  <gazebo reference="LH_foot_fixed">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+  <gazebo reference="LB_hip_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="LB_knee_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+  <gazebo reference="Lwheel_Link">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <gazebo reference="LH_FOOT">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+  <transmission name="LH_HAA_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_LBhip">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LH_HAA_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="LH_HFE_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_LBknee">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LH_HFE_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="LH_KFE_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_LWheel">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="LH_KFE_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <link
+    name="RB_hip_Link">
+    <inertial>
+      <origin
+        xyz="-0.000335186333982105 -0.0151577340782545 -0.0389841587933919"
+        rpy="0 0 0" />
+      <mass
+        value="0.34817" />
+      <inertia
+        ixx="0.00135"
+        ixy="0.00000"
+        ixz="-0.00001"
+        iyy="0.00143"
+        iyz="0"
+        izz="0.00009" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/RB_hip_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 -0.02 -0.04"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.20" radius="0.02" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_RBhip"
+    type="revolute">
+    <origin
+      xyz="0.00010384 -0.16944 0.06892"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="RB_hip_Link" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-0.529"
+      upper="0.529"
+      effort="69.923"
+      velocity="100" />
+  </joint>
+  <link
+    name="RB_knee_Link">
+    <inertial>
+      <origin
+        xyz="-0.00150501349453568 0.00047676180346401 0.109599170955343"
+        rpy="0 0 0" />
+      <mass
+        value="0.4417" />
+      <inertia
+        ixx="0.00244"
+        ixy="0.00000"
+        ixz="-0.00002"
+        iyy="0.00249"
+        iyz="-0.00002"
+        izz="0.00007" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/RB_knee_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0.11"
+        rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.22" radius="0.02" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_RBknee"
+    type="prismatic">
+    <origin
+      xyz="-0.00053861 -0.041755 -0.34324"
+      rpy="0 0 0" />
+    <parent
+      link="RB_hip_Link" />
+    <child
+      link="RB_knee_Link" />
+    <axis
+      xyz="0 0 -1" />
+    <limit
+      lower="-0.16"
+      upper="0"
+      effort="77.567"
+      velocity="100" />
+  </joint>
+  <joint dont_collapse="true" name="RH_foot_fixed" type="fixed">
+    <origin rpy="0 0 0" xyz="0 -0.063 -0.07"/>
+    <parent link="RB_knee_Link"/>
+    <child link="RH_FOOT"/>
+  </joint>
+  <link name="RH_FOOT">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+      <material name=""/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <geometry>
+        <sphere radius="0.01"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.06"/>
+      <inertia ixx="9.600000000000001e-06" ixy="0.0" ixz="0.0" iyy="9.600000000000001e-06" iyz="0.0" izz="9.600000000000001e-06"/>
+    </inertial>
+  </link>
+  <link
+    name="Rwheel_Link">
+    <inertial>
+      <origin
+        xyz="8.32571755495799E-05 0.0110455159380529 0.09"
+        rpy="0 0 0" />
+      <mass
+        value="0.825401" />
+      <inertia
+        ixx="0.00145"
+        ixy="0"
+        ixz="0"
+        iyy="0.00186"
+        iyz="0"
+        izz="0.00145" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://wheel_legged_description/meshes_controller/Rwheel_Link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="1.57 0 0" />
+      <geometry>
+        <cylinder length="0.04" radius="0.09" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Joint_RWheel"
+    type="fixed">
+    <origin
+      xyz="-0.0025095 -0.0617 -0.0021113"
+      rpy="0 0 0" />
+    <parent
+      link="RB_knee_Link" />
+    <child
+      link="Rwheel_Link" />
+    <!-- <axis
+      xyz="0 1 0" />
+    <limit
+      lower="0"
+      upper="3.14"
+      effort="77.567"
+      velocity="100" /> -->
+  </joint>
+  <gazebo reference="RH_foot_fixed">
+    <disableFixedJointLumping>true</disableFixedJointLumping>
+  </gazebo>
+  <gazebo reference="RB_hip_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+  <gazebo reference="RB_knee_Link">
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+    <self_collide>0</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+  <gazebo reference="Rwheel_Link">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+  </gazebo>
+  <gazebo reference="RH_FOOT">
+    <mu1>0.6</mu1>
+    <mu2>0.6</mu2>
+    <self_collide>1</self_collide>
+    <material>Gazebo/DarkGrey</material>
+    <kp value="1000000.0"/>
+    <kd value="100.0"/>
+  </gazebo>
+  <transmission name="RH_HAA_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_RBhip">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RH_HAA_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RH_HFE_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_RBknee">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RH_HFE_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="RH_KFE_tran">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Joint_RWheel">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="RH_KFE_motor">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+</robot>
