@@ -1,9 +1,0 @@
-<launch>
-
-    <include file="$(find wheelleg_hardwares)/launch/multiplot.launch" />
-
-    <node name="bridge" pkg="wheelleg_hardwares" type="RosToOcs2_hardwares" output="screen" />
-
-    <node name="controller" pkg="wheelleg_controllers" type="wheelleg_mpc" output="screen"/>
-
-</launch>
