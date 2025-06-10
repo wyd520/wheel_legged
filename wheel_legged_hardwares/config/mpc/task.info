@@ -1,0 +1,167 @@
+; wheelleg parameters
+max_input                       30.0
+wheelleg_parameters
+{
+  maxInput     30.0
+  gravity      9.81
+}
+
+; DDP settings
+ddp
+{
+  algorithm                      SLQ
+
+  nThreads                       4
+  threadPriority                 80
+
+  maxNumIterations               15
+  minRelCost                     1e-3
+  constraintTolerance            1e-4
+
+  displayInfo                    false
+  displayShortSummary            false
+  checkNumericalStability        false
+  debugCaching                   false
+
+  AbsTolODE                      1e-5
+  RelTolODE                      1e-3
+  maxNumStepsPerSecond           10000
+  timeStep                       1e-3
+  backwardPassIntegratorType     ODE45
+
+  inequalityConstraintMu         100.0
+  inequalityConstraintDelta      1.1
+
+  preComputeRiccatiTerms         true
+
+  useFeedbackPolicy              false
+
+  strategy                       LINE_SEARCH
+  lineSearch
+  {
+    minStepLength                1e-3
+    maxStepLength                0.5
+    hessianCorrectionStrategy    EIGENVALUE_MODIFICATION
+    hessianCorrectionMultiple    1e-4
+  }
+}
+
+; Rollout settings
+rollout
+{
+  AbsTolODE                    1e-6
+  RelTolODE                    1e-3
+  timeStep                     1e-2
+  maxNumStepsPerSecond         100000
+  checkNumericalStability      false
+  integratorType               ODE45
+}
+
+; MPC settings
+mpc
+{
+  timeHorizon                 1.0   ; [s]
+  solutionTimeWindow          -1    ; maximum [s]
+  coldStart                   false
+
+  debugPrint                  false
+
+  mpcDesiredFrequency         300   ; [Hz]
+  mrtDesiredFrequency         1000   ; [Hz]
+}
+
+bounds_penalty_config
+{
+  scale                       0.1
+  stepSize                    1.0
+}
+
+; initial state
+initialState
+{
+  (0,0) 0.0     ; s
+  (1,0) 0.0     ; ds
+  (2,0) 0.0     ; yaw              
+  (3,0) 0.0     ; dyaw
+  (4,0) 0.0     ; thetaL_l
+  (5,0) 0.0     ; dthetaL_l
+  (6,0) 0.0     ; thetaL_r
+  (7,0) 0.0     ; dthetaL_r
+  (8,0) 0.0     ; phi
+  (9,0) 0.0     ; dphi
+  (10,0) 0.0     ; alpha
+  (11,0) 0.0     ; dalpha
+}
+
+;initialInput
+initialInput
+{
+  (0,0)  0.0   ;Tw_l
+  (1,0)  0.0   ;Tw_r
+  (2,0)  0.0   ;Tl_l
+  (3,0)  0.0   ;Tl_r
+  (4,0)  0.0   ;T_waist
+}
+
+; state weight matrix
+Q
+{
+  (0,0) 1.0           ; s
+  (1,1) 1000.0        ; ds
+  (2,2) 1.0          ; yaw
+  (3,3) 1000.0         ; dyaw
+  (4,4) 300.0        ; thetaL_l
+  (5,5) 10.0         ; dthetaL_l
+  (6,6) 300.0        ; thetaL_r
+  (7,7) 10.0         ; dthetaL_r 
+  (8,8) 12000.0      ; phi  
+  (9,9) 10.0         ; dphi  
+  (10,10) 10000.0    ; alpha
+  (11,11) 10.0       ; dalpha
+}
+
+
+; control weight matrix
+R
+{
+  (0,0)  200.0  ;Tw_l
+  (1,1)  200.0  ;Tw_r 
+  (2,2)  20.0  ;Tl_l
+  (3,3)  20.0  ;Tl_r
+  (4,4)  10.0  ;T_waist
+}
+
+
+; final state weight matrix
+Q_final
+{
+  (0,0) 1.0         ; s
+  (1,1) 1000.0       ; ds
+  (2,2) 1.0          ; yaw
+  (3,3) 1000.0         ; dyaw
+  (4,4) 500.0        ; thetaL_l
+  (5,5) 10.0         ; dthetaL_l
+  (6,6) 500.0        ; thetaL_r
+  (7,7) 10.0         ; dthetaL_r 
+  (8,8) 15000.0      ; phi 
+  (9,9) 10.0        ; dphi  
+  (10,10) 12000.0    ; alpha
+  (11,11) 10.0       ; dalpha
+}
+
+x_final
+{
+  (0,0) 0.0     ; s
+  (1,0) 0.0     ; ds
+  (2,0) 0.0     ; yaw              
+  (3,0) 0.0     ; dyaw
+  (4,0) 0.0     ; thetaL_l
+  (5,0) 0.0     ; dthetaL_l
+  (6,0) 0.0     ; thetaL_r
+  (7,0) 0.0     ; dthetaL_r
+  (8,0) 0.0     ; phi
+  (9,0) 0.0     ; dphi
+  (10,0) 0.0     ; alpha
+  (11,0) 0.0     ; dalpha
+}
+
